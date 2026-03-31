@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      # Автоматически создаёт маршруты по именам сервисов в Eureka
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          routes:
+            - id: order-service
+              uri: lb://order-service        # lb = load balancer через Eureka
+              predicates:
+                - Path=/api/v1/orders/**
+
+            - id: message-service
+              uri: lb://message-service
+              predicates:
+                - Path=/api/v1/messages/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

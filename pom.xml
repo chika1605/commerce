@@ -20,6 +20,7 @@
         <module>discovery-service</module>
         <module>api-gateway</module>
         <module>services/message-service</module>
+        <module>services/order-service</module>
     </modules>
 
     <properties>

@@ -26,7 +26,6 @@ public class CdekService {
     private final CdekClient cdekClient;
     private final CdekProperties properties;
 
-
     public List<TariffInfo> getSupportedTariffs(int toCityCode, List<ShipmentPackage> packages) {
         CdekTariffListResponse response = cdekClient.getTariffList(toCityCode, packages);
         return response.getTariffCodes().stream()

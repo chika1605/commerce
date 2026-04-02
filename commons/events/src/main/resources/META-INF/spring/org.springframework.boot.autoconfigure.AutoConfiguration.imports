@@ -1,3 +1,4 @@
+com.pro.events.config.EventPublisherAutoConfiguration
 com.pro.events.config.KafkaConfig
 com.pro.events.config.KafkaProducerConfig
 com.pro.events.config.KafkaConsumerConfig

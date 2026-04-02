@@ -1,5 +1,8 @@
 package kg.example.levantee.service;
 
+import com.pro.events.model.EventTopics;
+import com.pro.events.model.OrderCreatedEvent;
+import com.pro.events.publisher.EventPublisher;
 import jakarta.transaction.Transactional;
 import kg.example.levantee.dto.mapper.OrderMapper;
 import kg.example.levantee.dto.orderItemDto.OrderItemRequest;
@@ -36,6 +39,7 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final ShipmentRepository shipmentRepository;
     private final OrderMapper orderMapper;
+    private final EventPublisher eventPublisher;
 
     @Transactional
     public OrderResponse create(OrderRequest request) {
@@ -73,7 +77,18 @@ public class OrderService {
         }
 
         order.setItems(items);
-        orderRepository.save(order);
+        order = orderRepository.save(order);
+
+        eventPublisher.publish(
+                EventTopics.ORDER_CREATED,
+                new OrderCreatedEvent(
+                        "EMAIL",
+                        "ekadyrkulov@gmail.com",
+                        order.getId(),
+                        order.getOrderCode()
+                )
+        );
+
         return orderMapper.toResponse(order);
     }
 

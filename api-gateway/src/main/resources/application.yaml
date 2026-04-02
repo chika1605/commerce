@@ -18,7 +18,8 @@ spring:
             - id: order-service
               uri: lb://order-service        # lb = load balancer через Eureka
               predicates:
-                - Path=/api/v1/orders/**
+                - Path=/orders/**, /products/**, /users/**
+
 
             - id: message-service
               uri: lb://message-service
@@ -29,3 +30,5 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

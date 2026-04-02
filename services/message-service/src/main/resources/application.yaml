@@ -6,6 +6,11 @@ spring:
   application:
     name: message-service
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ${spring.application.name}-group
+
   data:
     redis:
       host: localhost

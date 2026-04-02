@@ -21,6 +21,11 @@ public class MessageSenderService {
     private final MessageSenderFactory messageSenderFactory;
     private final PasswordEncoder passwordEncoder;
 
+    public void sendMessage(String senderType, String taget, String message) {
+        SenderType type = SenderType.valueOf(senderType.toUpperCase());
+        messageSenderFactory.getStrategy(type).send(taget, message);
+    }
+
     public MessageResponseDto send(MessageRequestDto dto, HttpServletRequest request) {
         String ip = request.getRemoteAddr();
         SenderType senderType = getSenderTypeFromString(dto.getChannel());

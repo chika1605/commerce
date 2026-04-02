@@ -44,10 +44,10 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Kafka -->
 		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
+			<groupId>com.pro</groupId>
+			<artifactId>events</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
